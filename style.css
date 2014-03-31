@@ -1,0 +1,50 @@
+/* Set the background color */
+
+body{
+    /*background-image: url("background1.png");*/
+    background-color: #d8e0f3;
+    /*color: #000000;*/
+    font-family: 'Helvetica Neue LT Pro' , 'sans-serif', 'Lucida Console';
+}
+
+ul#navigation {
+  margin:20px;
+  padding:0;
+  list-style:none;
+  width:525px;
+  text-align:center;
+}
+ul#navigation li a {
+ text-decoration:none;
+ padding:5px 0;
+ width:100px;
+ background:#666699;
+ color:#FFFFFF;
+ float:left;
+ text-align:center;
+}
+ul#navigation li a:hover {
+        color: #CCFFCC;
+        background: #29293D; 
+        transition-duration: 1s;
+	    -moz-transition-duration: 1s; /* Firefox 4 */
+	    -webkit-transition-duration: 1s; /* Safari and Chrome */
+	    -o-transition-duration: 1s; /* Opera */
+
+}
+a:hover {
+    color: #FFFF00;
+    text-decoration: underline;
+    transition-duration: 2s;
+    -moz-transition-duration: 2s; /* Firefox 4 */
+    -webkit-transition-duration: 2s; /* Safari and Chrome */
+    -o-transition-duration: 2s; /* Opera */
+
+}
+
+h1{
+    color: #198750;
+}
+table { background-color: #FFFFFF;
+        opacity: 0.9;
+ }
