@@ -179,6 +179,7 @@ body {
 .jumbotron {
     color: #2C3539;
     height: auto;
+    margin-bottom: 0;
 }
 
 .jumbotron a:link{
