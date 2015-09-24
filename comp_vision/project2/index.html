@@ -1,0 +1,279 @@
+<html>
+<head>
+<title>CV Project 2</title>
+<link href='http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono|Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" title="Default" href="styles/github.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<link rel="stylesheet" href="highlighting/styles/default.css">
+<script src="highlighting/highlight.pack.js"></script>
+
+<style type="text/css">
+body {
+	margin: 0px;
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	background: #fcfcfc;
+}
+h1 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 28px;
+	margin: 25px 0px 0px 0px;
+	//text-transform: lowercase;
+}
+
+h2 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 32px;
+	margin: 15px 0px 35px 0px;
+	color: #333;
+	word-spacing: 3px;
+}
+
+h3 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 26px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+h4 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 22px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+
+h5 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px 0px 10px 0px;
+	color: #111;
+	word-spacing: 2px;
+}
+
+p, li {
+	color: #444;
+}
+
+a {
+	color: #DE3737;
+}
+
+.container {
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+
+#header {
+	background: #333;
+	width: 100%;
+}
+
+#headersub {
+	color: #ccc;
+	width: 960px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+.chart {
+	width: 480px;
+}
+.lol {
+	font-size: 16px;
+	color: #888;
+	font-style: italic;
+}
+.sep {
+	height: 1px;
+	width: 100%;
+	background: #999;
+	margin: 20px 0px 20px 0px;
+}
+.footer{
+	font-size: 16px;
+}
+.latex {
+	width: 100%;
+}
+
+.latex img {
+	display: block;
+	margin: 0px auto 0px auto;
+}
+
+img.pad {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a.secret {
+	text-decoration: none;
+}
+
+pre {
+	font-family: 'Droid Sans Mono';
+	font-size: 14px;
+}
+
+td img {
+  vertical-align: middle;
+}
+
+#contents a {
+}
+</style>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body>
+<div id="header" >
+<div id="headersub">
+<h1>Daniel Puleri <span style="color: #DE3737">(<a class="secret" href="http://dpuleri.com">dpuleri3</a>)</span></h1>
+</div>
+</div>
+<div class="container">
+
+<h2>CS 4495 / 6476 Project 2: Local Feature Matching</h2>
+
+<p>In <a href="http://www.cc.gatech.edu/~hays/compvision/proj2/index.html">this homework assignment</a> we needed to implement a local feature matching algorithm which consisted of several parts:</p>
+
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Corner_detection#The_Harris_.26_Stephens_.2F_Plessey_.2F_Shi.E2.80.93Tomasi_corner_detection_algorithm">Harris</a> Corner detector</li>
+<li><a href="https://en.wikipedia.org/wiki/Scale-invariant_feature_transform">SIFT</a> Feature Detection</li>
+<li><a href="https://en.wikipedia.org/wiki/Nearest_neighbor_search">Nearest Neighbor Search</a></li>
+<li><a href="#extra-credit">My extra credit!</a></li>
+</ol>
+
+<p>With interest point detection, in this homework we are able to determine the common features between a pair of images. In industry, this type of image processing can be used to match images (like the homework) or to recognize images based on component parts. Scale-invariant feature transform (SIFT) is used to describe local features in an image. Nearest neighbor search is used to determine which vectors that make up the features of the images are closest to each other in n-dimensions.</p>
+
+<div style="clear:both">
+<h2 div id="harris">Harris Corner Detection</h2>
+
+<p>In my opinion, <a href="http://docs.opencv.org/doc/tutorials/features2d/trackingmotion/harris_detector/harris_detector.html">this</a> OpenCV page has a decent "how does it work" section on the Harris corner detector that explains it relatively plainly. Although, almost the same explanation was given in the textbook and in the course slides, so that may be a moot point.</p>
+
+<p>The meat of the code, to obtain the corner response values of each pixel boiled down to a few lines:</p>
+<pre><code>
+	% Calculating the gradient matrix
+    Ixx = horiz_deriv.^2;
+    Iyy = vert_deriv.^2;
+    Ixy = horiz_deriv.*vert_deriv;
+    % For each pixel
+    M = weighting(r,c).*[Ixx(r,c) Ixy(r,c); Ixy(r,c), Iyy(r,c)];
+    cornerness = det(M)-(ALPHA.*(trace(M).^2)); % Where alpha is a constant
+</code></pre>
+
+<p>This yields a matrix of corner responses that is of the same size as the image and is depicted in the figure below. After this, a threshold is applied to the image so that only corners with a large response are present in the image. What threshold is applied to the image makes a large difference in the final output because if the threshold is set too low, then interest points that do not have a very large corner response (and may not be very distinct) could get picked up and make it all the way to the end. I spent a <em>decent</em> amount of time optimizing what threshold I used on the corner responses so that I would get good outputs in the end.</p>
+
+<center>
+<a href="./notre_dame_responses.jpg"><img src="./notre_dame_responses.jpg" width="45%" /></a>
+<a href="./notre_dame_threshed.jpg"><img src="./notre_dame_threshed.jpg" width="45%" /></a>
+<p style="font-size: 14px">On the left are the corner responses visualized in grayscale and on the right are the thresholded corner responses</p>
+</center>
+
+<p>After all of this, the image is non-maximally suppressed by taking the maximum corner response in a given window. In my case, I found that a window size of 6x6 pixels yielded a good balance between precision and an even spread of interest points.</p>
+
+<center>
+<a href="./notre_dame_max_suppressed.jpg"><img src="./notre_dame_max_suppressed.jpg" width="45%" /></a>
+<p style="font-size: 14px">Non-maximal suppression of the corner responses</p>
+</center>
+
+<p>The image in this state could be considered a sparse matrix of putative interest points to be investigated further by the rest of the feature detection and matching pipeline.</p>
+
+<div style="clear:both" >
+<h2 div id="SIFT">SIFT Feature Detection</h2>
+
+<p>The <a href="http://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf">SIFT feature detection algorithm</a> works by making features out of the gradient direction and magnitude of the image. The first step is to blur the image slightly with a relatively small Gaussian filter so that noise does not get caught up in the feature descriptors. Then, the next step is to take the gradient of the image using an image filtering method, like a Sobel filter, in the x and y direction. This gradient is then used to calculate the magnitude and direction of the image at each pixel. Therefore, I was essentially left with two image-sized matrices consisting of magnitudes and directions.</p>
+
+<pre><code>
+    Gy = imfilter(img, sobel);
+    Gx = imfilter(img, sobel');
+    % gives the directions of the gradients in degrees
+    directionsDeg = atan2d(Gy, Gx);
+    % bring angles from 0 to 360 instead of -180 to 180
+    directionsDeg = directionsDeg + 180;
+    magnitudes = hypot(Gy,Gx);
+</code></pre>
+
+<center>
+<a href="./notre_dame_grad_mag.jpg"><img src="./notre_dame_grad_mag.jpg" width="45%" /></a>
+<a href="./notre_dame_grad_dir.jpg"><img src="./notre_dame_grad_dir.jpg" width="45%" /></a>
+<p style="font-size: 14px">On the left is the gradient magnitude of the image and on the right is the gradient direction of the image</p>
+<p style="font-size: 14px">I got the idea for this visualization from <a href="http://www.mathworks.com/help/images/ref/imgradient.html#bthh53d">this</a> Mathworks help page</p>
+</center>
+
+<p>Then, we go through the image and look at a 16x16 window of pixels around each interest point and calculate the feature. To do this, the gradient magnitudes and directions are binned based on their direction. I made bins going from 0&#176; to 360&#176; in steps of 45&#176;. Now, before this, the window needed to be weighted with a Gaussian so that the fall-off as you get farther from the interest point is smooth.</p>
+
+<p>Initially, I had done this incorrectly and had been applying this Gaussian filter to the magnitude matrix itself and not to a temporary matrix so it was throwing off my results. This is because if any interest points were within half of the window width from each-other I was down-weighting those pixels because of an overlap error. The funny thing is that I had originally written the code correctly, but then in my late night stupor I thought it would be more space efficient if I just applied the weighting directly to the image &#128542;--not a great idea. It unfortunately took longer than it should have for me to find that bug.</p>
+
+<p>Finally, the nx128 dimensional features were then thresholded, to make sure that an extra large gradient did not dominate the feature, and normalized.</p>
+
+<div style="clear:both" >
+<h2 div id="matching">Feature Matching</h2>
+
+<p>The features were then matched to each other using nearest neighbor search which can be implemented in Matlab very easily using the handy <code>knnsearch()</code> function. It would not have been hard to implement myself, but I used the built-in Matlab function because one, we were allowed to, and two, it called compiled C++ code that runs more efficiently than any Matlab I could write. I know, it's probably a minor boost..</p>
+
+<p>In this section the confidences, calculated by taking the ratio of the distances to the nearest and second nearest neighbor, of the nearest neighbors were then sorted so that the most confident matches could be used for evaluation. Moreover, matches below a ratio of 0.85 were also deleted from the list of matches.</p>
+
+<div style="clear:both" >
+<h2 div id="results">Results</h2>
+
+<p>The results I obtained were actually quite good on the Notre Dame image pair and on the Mount Rushmore image pair, which is to be expected if the algorithm is implemented correctly.</p>
+
+<center>
+<a href="./note_dame_eval.jpg"><img src="./note_dame_eval.jpg" width="80%" /></a>
+<p style="font-size: 14px">Notre Dame image pair with correct matches highlighted in green and incorrect matches highlighted in red</p>
+<p style="font-size: 14px">There were 92 good matches and 8 bad matches</p>
+</center>
+
+<center>
+<a href="./mount_rushmore_eval.jpg"><img src="./mount_rushmore_eval.jpg" width="80%" /></a>
+<p style="font-size: 14px">Mount Rushmore image pair with correct matches highlighted in green and incorrect matches highlighted in red</p>
+<p style="font-size: 14px">This image pair <em>also</em> had 92 good matches and 8 bad matches</p>
+</center>
+
+<p>Unfortunately, for the difficult image pair, the Gaudi images, I was unable to get a good matching ratio... This is most likely because the image pair varied widely in scale and I did not implement a version of SIFT that was more robust to differences in scale.</p>
+
+<center>
+<a href="./gaudi_eval.jpg"><img src="./gaudi_eval.jpg" width="80%" /></a>
+<p style="font-size: 14px">The Gaudi image pair with a pitiful 5 good matches and 95 bad matches, almost the opposite of the other two image pairs</p>
+</center>
+
+<div style="clear:both" >
+<h2 div id="extra-credit">Extra Credit</h2>
+
+<p>For extra credit, I used <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">Principal Component Analysis (PCA)</a>, which is a procedure that can be used to reduce the dimensionality of the features. PCA transforms the data with a linear transformation into a new coordinate system with fewer dimensions.</p>
+
+<p>Since there are fewer dimensions it means that the feature matching section of the algorithm can run faster since it does not need to run on the full dimensions of the features. However, this a space versus performance trade-off as the fewer dimensions you give the features the less the matching has to go on to match features from different images and performance falls off. This is illustrated in the graphs below:</p>
+
+<p>I varied the number of features used in PCA from 10 to 100 in steps of 10. I also graphed the performance with the full 128 dimensional features.</p>
+
+<center>
+<a href="./pca_precision.svg"><img src="./pca_precision.svg" /></a>
+<p style="font-size: 14px"></p>
+</center>
+
+<p>The precision of the feature matching worked well until the number of features dipped below 40. Then, the performance dropped off sharply. However, one can see that, from 80 up until the full 128 features, the performance is relatively stable. To me, this says that there may be diminishing returns to adding more and more features.</p>
+
+<center>
+<a href="./time_graph.svg"><img src="./time_graph.svg" /></a>
+<p style="font-size: 14px"></p>
+</center>
+
+<p>This is the time performance data taken on my computer with an <a href="http://www.cpu-world.com/CPUs/Bulldozer/AMD-FX-Series%20FX-6300.html">AMD FX-6300</a>. There seems to be a linear trade-off between the number of features and the time taken to match features between a pair of images--pretty much what I expected.</p>
+
+<br />
+<br />
+
+</div>
+</body>
+</html>
