@@ -1,0 +1,336 @@
+<html>
+<head>
+<title>CV Project 3</title>
+<link href='http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" title="Default" href="styles/github.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://latex.codeco/gs.com/latexit.js"></script>
+
+<link rel="stylesheet" href="highlighting/styles/default.css">
+<script src="highlighting/highlight.pack.js"></script>
+
+<style type="text/css">
+body {
+	margin: 0px;
+	width: 100%;
+	font-family: 'Crimson Text', serif;
+	font-size: 20px;
+	background: #fcfcfc;
+}
+h1 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 28px;
+	margin: 25px 0px 0px 0px;
+	//text-transform: lowercase;
+
+}
+
+h2 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 32px;
+	margin: 15px 0px 35px 0px;
+	color: #333;
+	word-spacing: 3px;
+}
+
+h3 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 26px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+h4 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 22px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+
+h5 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px 0px 10px 0px;
+	color: #111;
+	word-spacing: 2px;
+}
+
+p, li {
+	color: #444;
+}
+
+a {
+	color: #DE3737;
+}
+
+.container {
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+
+#header {
+	background: #333;
+	width: 100%;
+}
+
+#headersub {
+	color: #ccc;
+	width: 960px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+.chart {
+	width: 480px;
+}
+.lol {
+	font-size: 16px;
+	color: #888;
+	font-style: italic;
+}
+.sep {
+	height: 1px;
+	width: 100%;
+	background: #999;
+	margin: 20px 0px 20px 0px;
+}
+.footer{
+	font-size: 16px;
+}
+.latex {
+	width: 100%;
+}
+
+.latex img {
+	display: block;
+	margin: 0px auto 0px auto;
+}
+
+img.pad {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a.secret {
+	text-decoration: none;
+}
+
+pre {
+	font-family: 'Droid Sans Mono';
+	font-size: 14px;
+}
+
+td img {
+  vertical-align: middle;
+}
+
+#contents a {
+}
+</style>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body>
+<div id="header" >
+<div id="headersub">
+<h1>Daniel Puleri <span style="color: #DE3737">(<a class="secret" href="http://dpuleri.com">dpuleri3</a>)</span></h1>
+</div>
+</div>
+<div class="container">
+
+<h2>CS 4495 / 6476 Project 3: Camera Calibration and Fundamental Matrix Estimation with RANSAC</h2>
+
+<p>In <a href="http://www.cc.gatech.edu/~hays/compvision/proj3/index.html">this homework assignment</a> we needed to implement RANSAC to help estimate the fundamental matrix to get better point-to-point matches between images with affine transforms. There were several different parts to this assignment:</p>
+
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Camera_matrix">Camera projection matrix</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Eight-point_algorithm">Estimating the fundamental matrix</a></li>
+<li>Fundamental matrix estimation with <a href="http://www.mathworks.com/help/vision/ref/estimatefundamentalmatrix.html">RANSAC</a></li>
+<li>My <a href="#extra-credit">extra credit</a> with the normalized and scaled F matrix!</li>
+</ol>
+
+<center>
+<a href="./my_dog_correspondence.png"><img src="./my_dog_correspondence.png" width="95%" /></a>
+<p style="font-size: 14px">My attempt at camera calibration on pictures I took of my dog. It looks like a decent amount of the points turned out to actually correspond.</p>
+</center>
+
+<div style="clear:both">
+<h2 div id="camera_proj">Camera projection matrix</h2>
+
+<p>The camera projection matrix <code>M</code> is used to transform the 2-D image coordinates to the 3-D camera coordinates. The matrix <code>M</code> that I obtained can be seen below.</p>
+
+<p>The matrix that we're supposed to obtain is:</p>
+
+<center>
+<a href="./part1/given_matrix.gif"><img src="./part1/given_matrix.gif" /></a>
+</center>
+<p>The matrix that I obtained was around the same after a scale of -0.6349 was multiplied to my M matrix:</p>
+<center>
+<a href="./part1/my_matrix.gif"><img src="./part1/my_matrix.gif" /></a>
+</center>
+
+<p>The camera center that I obtained with a total residual of 0.0445 was:</p>
+
+<center>
+<a href="./part1/my_cam_center.gif"><img src="./part1/my_cam_center.gif" /></a>
+</center>
+<p>Which is very close to the center in the problem statement of:</p>
+<center>
+<a href="./part1/given_cam_center.gif"><img src="./part1/given_cam_center.gif" /></a>
+</center>
+
+<p>The projection points turned out to be quite similar to the actual points as can be seen below:</p>
+<center>
+<a href="./part1/camera_proj_accuracy.png"><img src="./part1/camera_proj_accuracy.png" /></a>
+</center>
+
+<div style="clear:both">
+<h2 div id="F_estimation">Estimating the fundamental matrix <strong>F</strong></h2>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Fundamental_matrix_%28computer_vision%29">fundamental matrix</a> <code>F</code> contains the information for both the translations and rotations from one image to another. With this information, points on equipolar lines can be matched between the images. <code>F</code> is the equipolar line for <code>&lt;u,v&gt;</code>, while <code>F'</code> gives the equipolar line for <code>&lt;u',v'&gt;</code>.</p>
+
+<p>By using the definition of the fundamental matrix below, one can use SVD to solve the homogeneous linear equation of <code>F</code>, using at least 8 points since the fundamental matrix is rank deficient.</p>
+
+<center>
+<a href="./part2/fundamental_matrix_def.gif"><img src="./part2/fundamental_matrix_def.gif" /></a>
+</center>
+
+<h3>Results:</h3>
+
+<p>The fundamental matrix that I obtained for the base image pair is shown below:</p>
+
+
+<center>
+<a href="./part2/fundamental_matrix_calc.gif"><img src="./part2/fundamental_matrix_calc.gif" /></a>
+</center>
+
+<p>This yields the equipolar lines below for the given normalized points in the images below:</p>
+
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="./part2/equi_img1.png"><img src="./part2/equi_img1.png" width="45%" /></a>
+<a href="./part2/equi_img2.png"><img src="./part2/equi_img2.png" width="45%" /></a>
+</td>
+</tr>
+</table>
+<p style="font-size: 14px">If you click on either of the images above, you will see that the equipolar lines intersect <em>almost</em> exactly with each of the interest points in the corresponding images.</p>
+</center>
+
+<div style="clear:both">
+<h2 div id="ransac">Fundamental matrix with RANSAC</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/RANSAC">RANSAC</a> (RAN-dom SAmple Consensus), is used to randomly sample the interest points and then score how well the putative fundamental matrix acts on the rest of the interest points. This is used because it is not known which particular 8 interest points would yield the best fundamental matrix for the pair of images. So, RANSAC is the iterative method used to find the optimal matrix for the points.</p>
+
+<p>For each putative <code>F</code> matrix, the distance of the fundamental matrix equation, with a given point, from zero is thresholded by a value <code>delta</code>, which in my case was <code>5x10<sup>-5</sup></code>. If a distance is within this value then the point is considered an "inlier." The fundamental matrix that is used is the one with the most inliers. Therefore, the number of inliers is the score used to compare the different putative fundamental matrices.</p>
+
+<p>My RANSAC code was run over 5,000 iterations so as to reduce the inherent randomness of whether or not the correct fundamental matrix will be found using the random sampling.</p>
+
+<h3>Results:</h3>
+
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="./part3/equi_rushmore1.png"><img src="./part3/equi_rushmore1.png" width="45%" /></a>
+<a href="./part3/equi_rushmore2.png"><img src="./part3/equi_rushmore2.png" width="45%" /></a>
+</td>
+</tr>
+</table>
+<p style="font-size: 14px">Equipolar lines for the Mt. Rushmore image pair using the RANSAC determined fundamental matrix.</p>
+</center>
+
+<br />
+
+<center>
+<a href="./part3/rushmore_arrow_vis.jpg"><img src="./part3/rushmore_arrow_vis.jpg" width="97%" /></a>
+<p style="font-size: 14px">Arrow visualization for Mt. Rushmore image pair. 188 inliers were found, but only the 30 best are shown above.</p>
+</center>
+
+<br />
+<br />
+
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="./part3/equi_notredame1.png"><img src="./part3/equi_notredame1.png" width="45%" /></a>
+<a href="./part3/equi_notredame2.png"><img src="./part3/equi_notredame2.png" width="45%" /></a>
+</td>
+</tr>
+</table>
+<p style="font-size: 14px">Equipolar lines for the Notre Dame image pair using the RANSAC determined fundamental matrix.</p>
+</center>
+
+<br />
+
+<center>
+<a href="./part3/notredame_arrow_vis.jpg"><img src="./part3/notredame_arrow_vis.jpg" width="97%" /></a>
+<p style="font-size: 14px">Arrow visualization for Notre Dame image pair. 204 inliers were found, but only the 30 best are shown above.</p>
+</center>
+
+<br />
+
+<div style="clear:both">
+<h2 div id="extra-credit">Extra Credit: Fundamental matrix estimation with normalized coordinates</h2>
+
+<p>The estimation of the fundamental matrix can be improved by normalizing the points used. The points are normalized so that they are centered at <code>&lt;0,0&gt;</code> and the points are also scaled so that their average magnitude is <code>&radic;<span style="text-decoration: overline">2</span></code>. The process is explained quite succinctly in <a href="http://www.ecse.rpi.edu/Homepages/qji/CV/8point.pdf">this</a> paper on some RPI class website (Equations <strong>(1.28)</strong> to <strong>(1.34)</strong> specifically).</p>
+
+<p>The results of the Gaudi image pair without using the normalized coordinates and for 5,000 iterations are seen below:</p>
+
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="./extra-credit/equi_gaudi1.png"><img src="./extra-credit/equi_gaudi1.png" width="45%" /></a>
+<a href="./extra-credit/equi_gaudi2.png"><img src="./extra-credit/equi_gaudi2.png" width="45%" /></a>
+</td>
+</tr>
+</table>
+<p style="font-size: 14px">Equipolar lines for the Gaudi image pair using the RANSAC determined fundamental matrix.</p>
+</center>
+
+<br />
+
+<center>
+<a href="./extra-credit/gaudi_arrow_vis.jpg"><img src="./extra-credit/gaudi_arrow_vis.jpg" width="97%" /></a>
+<p style="font-size: 14px">Arrow visualization for Gaudi image pair. 257 inliers were found, but only the 30 best are shown above.</p>
+</center>
+
+<br />
+
+<p>With the point normalization and only 2,000 iterations, the results are much better and can be seen below:</p>
+
+<center>
+<table border=0>
+<tr>
+<td>
+<a href="./extra-credit/equi_norm_gaudi1.png"><img src="./extra-credit/equi_norm_gaudi1.png" width="45%" /></a>
+<a href="./extra-credit/equi_norm_gaudi2.png"><img src="./extra-credit/equi_norm_gaudi2.png" width="45%" /></a>
+</td>
+</tr>
+</table>
+<p style="font-size: 14px">Equipolar lines for the Gaudi image pair using the RANSAC determined fundamental matrix, using the normalized points.</p>
+</center>
+
+<br />
+
+<center>
+<a href="./extra-credit/gaudi_norm_arrow_vis.jpg"><img src="./extra-credit/gaudi_norm_arrow_vis.jpg" width="97%" /></a>
+<p style="font-size: 14px">Arrow visualization for Gaudi image pair. 421 inliers were found, but only the 30 best are shown above.</p>
+</center>
+
+<br />
+<br />
+
+</div>
+</body>
+</html>
