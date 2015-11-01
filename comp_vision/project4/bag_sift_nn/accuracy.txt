@@ -1,0 +1,2 @@
+Accuracy (mean of diagonal of confusion matrix) is 0.471
+Elapsed time is 122.018726 seconds

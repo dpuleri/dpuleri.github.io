@@ -1,0 +1,2 @@
+0.205
+Elapsed time is 25.281986 seconds
