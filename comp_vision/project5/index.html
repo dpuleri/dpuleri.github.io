@@ -1,0 +1,271 @@
+<html>
+<head>
+<title>CV Project 5</title>
+<link href='http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" title="Default" href="styles/github.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://latex.codeco/gs.com/latexit.js"></script>
+
+<link rel="stylesheet" href="highlighting/styles/default.css">
+<script src="highlighting/highlight.pack.js"></script>
+
+<style type="text/css">
+body {
+	margin: 0px;
+	width: 100%;
+	font-family: 'Crimson Text', serif;
+	font-size: 20px;
+	background: #fcfcfc;
+}
+h1 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 28px;
+	margin: 25px 0px 0px 0px;
+	//text-transform: lowercase;
+
+}
+
+h2 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 32px;
+	margin: 15px 0px 35px 0px;
+	color: #333;
+	word-spacing: 3px;
+}
+
+h3 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 26px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+h4 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 22px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+
+h5 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px 0px 10px 0px;
+	color: #111;
+	word-spacing: 2px;
+}
+
+p, li {
+	color: #444;
+}
+
+a {
+	color: #DE3737;
+}
+
+.container {
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+
+#header {
+	background: #333;
+	width: 100%;
+}
+
+#headersub {
+	color: #ccc;
+	width: 960px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+.chart {
+	width: 480px;
+}
+.lol {
+	font-size: 16px;
+	color: #888;
+	font-style: italic;
+}
+.sep {
+	height: 1px;
+	width: 100%;
+	background: #999;
+	margin: 20px 0px 20px 0px;
+}
+.footer{
+	font-size: 16px;
+}
+.latex {
+	width: 100%;
+}
+
+.latex img {
+	display: block;
+	margin: 0px auto 0px auto;
+}
+
+img.pad {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a.secret {
+	text-decoration: none;
+}
+
+pre {
+	font-family: 'Droid Sans Mono';
+	font-size: 14px;
+}
+
+td img {
+  vertical-align: middle;
+}
+
+#contents a {
+}
+</style>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body>
+<div id="header" >
+<div id="headersub">
+<h1>Daniel Puleri <span style="color: #DE3737">(<a class="secret" href="http://dpuleri.com">dpuleri3</a>)</span></h1>
+</div>
+</div>
+<div class="container">
+
+<h2>CS 4495 / 6476 Project 5: Face Detection with a Sliding Window</h2>
+
+<div style="float: right">
+<img src="143easy_2013.png" width="550px"/>
+<p style="font-size: 14px">Good detection of a previous CS class.</p>
+</div>
+
+<p>In <a href="http://www.cc.gatech.edu/~hays/compvision/proj3/index.html">this homework assignment</a>, the objective was to detect faces in given input images and the process can be generalized to detect other objects in images. To do this, we followed the general outline of <a href="http://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf">Dalal and Triggs</a>. This method uses a histogram of oriented gradients (HOG) as the descriptor, which is somewhat similar to the <a href="https://en.wikipedia.org/wiki/Scale-invariant_feature_transform">SIFT</a> features descriptors that we had done in <a href="http://www.cc.gatech.edu/~hays/compvision/proj2/">previous</a> projects. It is broken up into three main parts:</p>
+
+<ol>
+<li>Gathering positive HOG features and negative</li>
+<li>Training the classifier</li>
+<li>Running the detector</li>
+<li>Extra credit!</li>
+</ol>
+
+<div style="clear:both">
+<h2 id="HOG">HOG Feature Detection</h2>
+
+<p>In the first part of the project, we gathered positive features of known faces. The features were made up of the <a href="https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients">histogram of oriented gradients</a> for each image. I opted not to implement HOG on my own and instead used the <a href="http://www.vlfeat.org/matlab/vl_hog.html">included</a> HOG function in the vl_feat library.</p>
+
+<p>All of the faces were 36x36 crops and one HOG feature was taken for each face. Each feature was 6x6x31 pixels, where each pixel in the HOG space corresponds to 6 pixels in the image space. The HOG for each image was then flattened out into a 1x1116 vector so that all of the features for each positive face could be concatenated into one large positive feature matrix.</p>
+
+<p>The positive faces that were used were used came from the <a href="http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces/">Caltech 10,000 Web Faces Project</a>. I used 6,713 faces for my positive feature set.</p>
+
+<p>The negative examples were taken from many different images. Since the negative images were <em>not</em> already pre-cropped, I needed to find 36x36 patches in each image. As can be seen below, I first calculated how many patches would need to be taken from each negative image to match the target number of negative features inputted by the user. Then, for each image I generated the requisite number of points randomly and then calculated the HOG for that patch.</p>
+
+<pre><code>
+% Number of negative feature patches needed per image
+num_samp_img = ceil(num_samples/num_images);
+
+% Randomly generated points to sample from in each image
+cur_img = single(cur_img);
+[r_max, c_max] = size(cur_img);
+r_max = r_max - feature_params.template_size + 1; % off by 1 stuff due to the zero indexing and Matlab's rand
+c_max = c_max - feature_params.template_size + 1;
+r_end = randi([1,r_max],1,num_samp_img);
+c_end = randi([1,c_max],1,num_samp_img);
+
+</code></pre>
+
+
+<div style="clear:both" >
+<h2 id="training">Classifier Training</h2>
+<p>After the positive and negative training examples were gathered, a classifier to discriminate between a face and non-face needed to be trained. To do this, a linear <a href="https://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> was used. The training was straightforward since the features were already sectioned off into positive and negative classifications. The free variable of lambda was left to the suggested value of 0.0001. This produced the HOG face below:</p>
+
+<center>
+<a href="hog_face.png"><img src="hog_face.png" /></a>
+<p style="font-size: 14px">Visualization for the HOG of the face that the classifier learned. If you squint a lot.. it somewhat looks like a face.</p>
+</center>
+
+<p>When the classifier was tested on the training data, it of course did very well and had an accuracy of 99%.</p>
+
+<div style="clear:both" >
+<h2 id="detection">Running the Detector</h2>
+
+<p>The detector was run on each image using a sliding window to get the HOG for a 36x36 patch. To do this, a HOG was calculated every 6 pixels along the x and y dimension of the image. However, instead of actually sliding around in the image space, I made one call to the <code>vl_hog</code> function and then moved by one pixel in the hog space, where each pixel corresponds to 6 pixels in the regular image.</p>
+
+<p>In addition, I resized the image by a factor of 0.8 (in my highest scoring, but still reasonably fast implementation) iteratively and ran this same detection at the varying scales. This helps to catch faces that may not be 36x36 pixels in the un-resized image so that each time the image is blown up the faces will become smaller and hopefully will be detected at the correct scale so that faces of sizes other than 36x36 can be detected. This scaling was done until the image was resized to 36x36 pixels, so that faces that take up the entire image can be detected.</p>
+
+<p>For each HOG patch detected in the multiple dimensions, a score on whether or not it was a face was calculated using the linear SVM. This confidence was then thresholded to discard obvious non-faces. I used a threshold of 0.5 in my final version. These confidences were then non-maximally suppressed so that only local maxima were taken.</p>
+
+<p>One of the trickier parts of this section of the algorithm was matching the coordinates in the scaled HOG space to the coordinates in the original images so that the bounding boxes would make sense. <a href="https://twitter.com/dpuleri/status/667093157818052608">I</a> encountered a lot of off-by-one mistakes due to Matlab's indexing starting at 1. However, once that was figured out, everything just became a matter of tuning parameters.</p>
+
+<h3>Results:</h3>
+
+<p>Eventually, I was able to get a precision of 84.9% with a scaling of 0.8 and a step size of 6 pixels in the image space. This took 10 minutes to run on the whole test dataset on my laptop and could be sped up by using a smaller step size or a greater threshold. I found that a lot of time was spent in the non-max suppression function, so that is most likely one that could be optimized by being rewritten in C++ as a <code>.mex</code> file and then called from Matlab.</p>
+
+<center>
+<a href="average_precision.png"><img src="average_precision.png" /></a>
+<p style="font-size: 14px">Precision-recall curve for my classifier on the test data.</p>
+</center>
+
+<p>And, below are some of the sample detections that I have taken from the results. Note that I pretty much only took good results.</p>
+
+<center>
+<a href="good_selection.png"><img src="good_selection.png" /></a>
+</center>
+
+<br />
+
+<center>
+<a href="audrey_selection.png"><img src="audrey_selection.png" /></a>
+</center>
+
+<br />
+
+<center>
+<a href="detections_bttf206.jpg.png"><img src="detections_bttf206.jpg.png" /></a>
+</center>
+
+<br />
+
+<center>
+<a href="detections_class57.jpg.png"><img src="detections_class57.jpg.png" /></a>
+</center>
+
+<br />
+
+<center>
+<a href="4495easy.png"><img src="4495easy.png" /></a>
+</center>
+
+<div style="clear:both" >
+<h2 id="extra-credit">Extra Credit: Hard Negative Mining</h2>
+
+<p>For extra credit I implemented hard negative mining. This means that instead of randomly sampling patches in the images that do not contain faces, I only took randomly sampled patches that scored greater than a threshold (-1 in my case) using the previously trained SVM. These new hard mined negatived were then used to re-train the SVM so that all of the negative features used for training would be patches that looked somewhat face-like, instead of obvious non-faces.</p>
+
+<p>To do this I followed the general procedure outlined in the notes. However, instead of gathering negative samples until my memory was full, I kept it to the same amount of negative samples (~10,000) as were randomly samples so that two methods could be compared.</p>
+
+<center>
+<a href="average_precision_ec.png"><img src="average_precision_ec.png" /></a>
+<p style="font-size: 14px">Precision-recall curve for my extra credit classifier on the test data.</p>
+</center>
+
+<p>Unfortunately, with the extra credit the classifier didn't do any better than the classifier with randomly sampled negative features. I think this happened because the randomly sampled features were pretty decent and it was hard to beat them. Moreover, since I still generated randomly sampled patches with the hard negative mining, I may have had some repeat patches. Although, I did notice that it did well more consistently with the hard negative mining.</p>
+
+
+<br />
+<br />
+
+</div>
+</body>
+</html>
