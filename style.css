@@ -7,10 +7,6 @@ body {
   text-align: center;
 }
 
-@media (min-width: 768px) {
-}
-
-
 /*
  * Header and Footer
  */
@@ -21,15 +17,8 @@ body {
  }
 
  .navbar-right {
-     font-size:150%;
+     font-size: 150%;
  }
-
-/*
- * Affix and center
- */
-
-@media (max-width: 768px) {
-}
 
 /*
     CSS for timeline
@@ -169,6 +158,7 @@ body {
 .jumbotron {
     color: #2C3539;
     height: auto;
+    padding: 5%;
     margin-bottom: 0;
 }
 
@@ -186,19 +176,18 @@ body {
 
 .jumbotron#aboutme{
     background: #FFF;
-    padding: 5%;
     padding-bottom: 2%;
 }
 
 .jumbotron#timeline{
     background: #FFF;
-    padding: 5%;
     padding-bottom: 2%;
 }
 
 #me-header {
     width: 50%;
 }
+
 
 img#me {
     float: left;
@@ -210,4 +199,57 @@ img#me {
 
 #text-me {
     padding-top: 40px;
+    align: center;
+}
+
+/*Adjust stuff for phones*/
+@media (max-width: 768px) {
+
+    .timeline:before {
+      left: 3%;
+    }
+    .timeline > li > .timeline-panel {
+      width: 89%;
+      float: right;
+    }
+
+    .timeline > li > .timeline-badge {
+      left: 3%;
+    }
+
+    .timeline > li > .timeline-panel:before {
+      border-left-width: 0;
+      border-right-width: 15px;
+      left: -15px;
+      right: auto;
+    }
+
+    .timeline > li > .timeline-panel:after {
+      border-left-width: 0;
+      border-right-width: 14px;
+      left: -14px;
+      right: auto;
+    }
+
+
+    .jumbotron {
+        padding: 1%;
+    }
+    .container-fluid {
+        width: 100%;
+    }
+
+    #me-header {
+        width: 100%;
+    }
+
+    img#me {
+        margin-top: 20%;
+        border: 5px solid black;
+        float: none;
+    }
+
+    #text-me {
+        padding-top: 0px;
+    }
 }
