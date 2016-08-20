@@ -28,12 +28,11 @@ html,
 body {
   height: 100%;
   background-color: #333;
-  /* background-color: #5cb85c; */
 }
+
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -59,7 +58,6 @@ body {
   padding: 30px;
 }
 
-
 /*
  * Header
  */
@@ -78,7 +76,7 @@ body {
   padding-right: 0;
   padding-left: 0;
   font-size: 16px;
-  font-weight: bold;
+  /*font-weight: bold;*/
   color: #fff; /* IE8 proofing */
   color: #5cb85c
   color: rgba(255,255,255,.75);
@@ -134,7 +132,7 @@ body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
 /*     position: fixed;  turned off fixed position*/
@@ -275,26 +273,6 @@ body {
   right: auto;
 }
 
-.timeline-badge.primary {
-  background-color: #2e6da4 !important;
-}
-
-.timeline-badge.success {
-  background-color: #3f903f !important;
-}
-
-.timeline-badge.warning {
-  background-color: #f0ad4e !important;
-}
-
-.timeline-badge.danger {
-  background-color: #d9534f !important;
-}
-
-.timeline-badge.info {
-  background-color: #5bc0de !important;
-}
-
 .timeline-title {
   margin-top: 0;
   color: inherit;
@@ -325,12 +303,6 @@ body {
     display: block;
 }*/
 
-.jumbotron#intro{
-    padding-top: 45%;
-    background: transparent;
-    color:#FFF;
-}
-
 .jumbotron {
     color: #2C3539;
     height: auto;
@@ -349,31 +321,30 @@ body {
     color: #618200;
 }
 
-.thin {
-    max-width: 55%;
-    margin-top:0;
-    margin-right:auto;
-    margin-bottom:0;
-    margin-left:auto;
-}
-
-.work-item {
-    font-size: 150%;
-}
-
-.link-item {
-    font-size: 300%;
-}
-
 .jumbotron#aboutme{
+    background: #FFF;
     padding: 5%;
+    padding-bottom: 2%;
 }
 
-.jumbotron#professional_info{
+.jumbotron#timeline{
+    background: #FFF;
     padding: 5%;
+    padding-bottom: 2%;
 }
 
-.jumbotron#contact{
-    background: #5cb85c;
-    padding: 5%;
+#me-header {
+    width: 50%;
+}
+
+img#me {
+    float: left;
+    border: 5px solid black;
+    margin: 10px;
+    padding: none;
+    max-width: none;
+}
+
+#text-me {
+    padding-top: 40px;
 }
