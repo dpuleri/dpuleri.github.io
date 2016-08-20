@@ -8,13 +8,13 @@
     <meta name="author" content="">
     <link rel="icon" href="./favicon.ico">
 
-    <title>Daniel's Website</title>
+    <title>Daniel Puleri</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 
     <!-- Style for buttons -->
     <link href="./bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
@@ -41,19 +41,9 @@
             <div class="inner">
               <h3 class="masthead-brand">Daniel</h3>
               <ul class="nav masthead-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#aboutme">About Me</a></li>
-                <li><a href="#professional_info">Professional Info</a></li>
-                <li><a href="#contact">Links/Contact Me</a></li>
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#aboutme">Timeline</a></li>
               </ul>
-            </div>
-            <div id="intro" class="jumbotron">
-                <div class="jumbo-inner-wrapper">
-                    <h1 class="section-title dark">Daniel Puleri</h1>
-                    <div class="row">
-                        <p>Scroll down for more!</p>
-                    </div>
-                </div>
             </div>
           </div>
 
@@ -64,57 +54,97 @@
 
         <div id="aboutme" class="jumbotron">
             <div class="jumbo-inner-wrapper">
-                <h1 class="section-title dark">So a little bit about me...</h1>
-                <div class="row thin">
-
-                    <p> Hello World. </p>
-                    <p>I'm an undergraduate at the <a href="http://gatech.edu" target="_blank">Georgia Institute of Technology</a>
-                    studying <a href="http://chbe.gatech.edu" target="_blank">chemical engineering</a> with a computer science minor.
-                    </p>
-                    <img class="img-responsive img-rounded" src="school.jpg" alt="picture of gatech">
-                    <p>
-                    Born and raised in the sunny state of Florida. I have just started handling the fact that it snowed in a place that I live.
-                    </p>
-                    <img class="img-responsive img-rounded" src="beach.jpg" alt="picture of beach">
-                    <p>I really enjoy the beach too...</p>
-
+                <div class="container">
+                    <div id="me-header">
+                        <img src="awk.jpg" class="img-circle" id="me"/>
+                        <div id="text-me">
+                            <h2>Daniel Puleri</h2>
+                            <p>Graduate Student in BME</p>
+                            <p>Duke University</p>
+                            <p>daniel [dot] puleri [at] duke [dot] edu</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="professional_info" class="jumbotron">
+        <div id="timeline" class="jumbotron">
             <div class="jumbo-inner-wrapper">
-                <h1 class="section-title dark"><span class=" glyphicon glyphicon-briefcase"></span>  Resume?</h1>
-                <div class="row thin">
-                    <h2>Work experience:</h2>
-                    <br>
-                    <ul class="list-group">
-                        <li class="list-group-item work-item">Currently: Undergraduate Research at the <a href="http://lulab.gatech.edu" target="_blank">Lu Lab</a></li>
-                        <li class="list-group-item work-item">Summer 2015: Engineering internship at <a href="http://lilly.com" target="_blank">Eli Lilly and Company</a></li>
-                        <li class="list-group-item work-item">Summer 2014: Product supply engineer with a project management role at <a href="http://pg.com" target="_blank">Procter &amp; Gamble</a> in Iowa City</li>
-                        <li class="list-group-item work-item">Summer 2013: Product supply engineer with a design engineering role at Procter &amp; Gamble in Cincinnati</li>
-                    </ul>
+                <h2 class="section-title dark">Rough Timeline</h2>
 
-                    <h2>Interests &amp; activities:</h2>
-                    <br>
-                    <ul class="list-group">
-                        <li class="list-group-item work-item">Treasurer for <a href="http://lasa-gt.org" target="_blank">Latin American Student Association</a></li>
-                        <li class="list-group-item work-item">Operator and news team at <a href="http://wrek.org" target="_blank">WREK</a> student radio</li>
-                        <li class="list-group-item work-item">American Institute of Chemical Engineers national and chapter member</li>
+                <div class="container">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Graduate Program at Duke University</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2016</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Start PhD program in Biomedical Engineering at Duke. Working with the Randles Lab.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Undergraduate Research Assistant</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> January 2013 - May 2016</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Undergraduate research assistant in the Lu Lab at Georgia Tech.</p>
+                                    <p>Developed computer vision and machine learning techniques to analyze images and process data gained from <em>C. elegans</em>.</p>
+                                    <p>Experience working in a wet lab and with fluorescent microscopy.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Got Out of Georgia Tech</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> May 2016</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Graduation from Georgia Institute of Technology with a BS in Chemical and Biomolecular Engineering and a minor in Computer Science.</p>
+                                    <p>Highest Honors!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Internship with Eli Lilly</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2015</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Work with parenterals to create tools to help identify downtime, create automation tools to analyze production
+                                        log data, and work to install new equipment.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Internship with Procter &amp; Gamble</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2013 &amp; 2014</small></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Start at Georgia Tech</h4>
+                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2012</small></p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="contact" class="jumbotron">
-            <div class="jumbo-inner-wrapper">
-                <h1 class="section-title dark"> <span class="glyphicon glyphicon-link"></span>  Links/Contact Me</h1>
-                <div class="row thin">
-                     <ul class="social">
-                        <li class="link-item"><a href="http://github.com/dpuleri" target="_blank"><i class="fa fa-github"></i> Github </a></li>
-                        <li class="link-item"><a href="mailto:daniel@puleri.org" ><span class="glyphicon glyphicon-envelope"></span> Email </a></li>
-                    </ul>
-
                 </div>
             </div>
         </div>
@@ -122,7 +152,7 @@
         <div class="mastfoot">
             <div class="inner">
               <p>Created by Me! Source on github</p>
-              <p>Made with <a href="http://getbootstrap.com">Bootstrap</a> and  <a href="http://lipis.github.io/bootstrap-social/">Social Buttons</a>.</p>
+              <p>Made with <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://lipis.github.io/bootstrap-social/">Social Buttons</a>.</p>
             </div>
         </div>
 
