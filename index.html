@@ -31,134 +31,154 @@
 
   <body>
 
-    <div class="site-wrapper fill">
-
-      <div class="site-wrapper-inner fill">
-
-        <div class="cover-container fill">
-
-          <div class="masthead clearfix fill">
-            <div class="inner">
-              <h3 class="masthead-brand">Daniel</h3>
-              <ul class="nav masthead-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#aboutme">Timeline</a></li>
-              </ul>
-            </div>
+      <!-- <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <div class="navbar-brand">
+                      Daniel
+                  </div>
+                  <ul class="nav masthead-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="#aboutme">Timeline</a></li>
+                  </ul>
+              </div>
           </div>
+    </nav> -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Daniel</a>
+            </div>
 
-          <!-- TODO: more stuff on the inside -->
-        </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="http://github.com/dpuleri" target="_blank"><i class="fa fa-lg fa-github"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://twitter.com/dpuleri" target="_blank"><i class="fa fa-lg fa-twitter"></i></a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
-        <!-- Start internal jumbotrons -->
+    <!-- Start internal jumbotrons -->
 
-        <div id="aboutme" class="jumbotron">
-            <div class="jumbo-inner-wrapper">
-                <div class="container">
-                    <div id="me-header">
-                        <img src="awk.jpg" class="img-circle" id="me"/>
-                        <div id="text-me">
-                            <h2>Daniel Puleri</h2>
-                            <p>Graduate Student in BME</p>
-                            <p>Duke University</p>
-                            <p>daniel [dot] puleri [at] duke [dot] edu</p>
-                        </div>
+    <div id="aboutme" class="jumbotron">
+        <div class="jumbo-inner-wrapper">
+            <div class="container">
+                <div id="me-header">
+                    <img src="awk.jpg" class="img-circle" id="me"/>
+                    <div id="text-me">
+                        <h2>Daniel Puleri</h2>
+                        <p>Graduate Student in BME</p>
+                        <p>Duke University</p>
+                        <p>daniel [dot] puleri [at] duke [dot] edu</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div id="timeline" class="jumbotron">
-            <div class="jumbo-inner-wrapper">
-                <h2 class="section-title dark">Rough Timeline</h2>
-
-                <div class="container">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Graduate Program at Duke University</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2016</small></p>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Start PhD program in Biomedical Engineering at Duke. Working with the Randles Lab.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Undergraduate Research Assistant</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> January 2013 - May 2016</small></p>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Undergraduate research assistant in the Lu Lab at Georgia Tech.</p>
-                                    <p>Developed computer vision and machine learning techniques to analyze images and process data gained from <em>C. elegans</em>.</p>
-                                    <p>Experience working in a wet lab and with fluorescent microscopy.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Got Out of Georgia Tech</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> May 2016</small></p>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Graduation from Georgia Institute of Technology with a BS in Chemical and Biomolecular Engineering and a minor in Computer Science.</p>
-                                    <p>Highest Honors!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Internship with Eli Lilly</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2015</small></p>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Work with parenterals to create tools to help identify downtime, create automation tools to analyze production
-                                        log data, and work to install new equipment.</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Internship with Procter &amp; Gamble</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2013 &amp; 2014</small></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Start at Georgia Tech</h4>
-                                    <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2012</small></p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="mastfoot">
-            <div class="inner">
-              <p>Created by Me! Source on github</p>
-              <p>Made with <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://lipis.github.io/bootstrap-social/">Social Buttons</a>.</p>
-            </div>
-        </div>
-
-      </div>
-
     </div>
+
+    <div id="timeline" class="jumbotron">
+        <div class="jumbo-inner-wrapper">
+            <h2 class="section-title dark">Rough Timeline</h2>
+
+            <div class="container">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Graduate Program at Duke University</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2016</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Start PhD program in Biomedical Engineering at Duke. Working with the Randles Lab.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Undergraduate Research Assistant</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> January 2013 - May 2016</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Undergraduate research assistant in the Lu Lab at Georgia Tech.</p>
+                                <p>Developed computer vision and machine learning techniques to analyze images and process data gained from <em>C. elegans</em>.</p>
+                                <p>Experience working in a wet lab and with fluorescent microscopy.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Got Out of Georgia Tech</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> May 2016</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Graduation from Georgia Institute of Technology with a BS in Chemical and Biomolecular Engineering and a minor in Computer Science.</p>
+                                <p>Highest Honors!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Internship with Eli Lilly</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2015</small></p>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Work with parenterals to create tools to help identify downtime, create automation tools to analyze production
+                                    log data, and work to install new equipment.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Internship with Procter &amp; Gamble</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Summer 2013 &amp; 2014</small></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge"><span class="glyphicon glyphicon-education" aria-hidden="true"></span></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4 class="timeline-title">Start at Georgia Tech</h4>
+                                <p><small class="text-muted"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> August 2012</small></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+      <p>Created by Me! Source on <a href="https://github.com/dpuleri/dpuleri.github.io">github</a></p>
+      <p>Made with <a href="http://getbootstrap.com">Bootstrap</a> and <a href="http://lipis.github.io/bootstrap-social/">Social Buttons</a>.</p>
+    </div>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
