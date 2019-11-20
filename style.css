@@ -195,7 +195,8 @@ img#me {
     border: 5px solid black;
     margin: 10px;
     padding: none;
-    max-width: none;
+    max-width: 250px;
+    max-width: 50%;
 }
 
 #text-me {
