@@ -8,6 +8,10 @@ body {
   padding-top: 65px;
 }
 
+.jumbo-inner-wrapper {
+  max-width: 1400px;
+}
+
 /*
  * Header and Footer
  */
@@ -161,10 +165,6 @@ body {
     height: auto;
     padding: 5%;
     margin-bottom: 0;
-}
-
-.jumbotron a:link{
-    color: #577492;
 }
 
 .jumbotron a:hover{
