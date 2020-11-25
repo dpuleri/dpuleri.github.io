@@ -185,6 +185,11 @@ body {
     padding-bottom: 2%;
 }
 
+.jumbotron#publications{
+  background: #FFF;
+  padding-bottom: 2%;
+}
+
 #me-header {
     width: 50%;
 }
